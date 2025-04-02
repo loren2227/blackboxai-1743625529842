@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilipinoPro - Learn Filipino the Fun Way</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .cultural-tidbit {
+            background-color: #FFD700;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be loaded here via JS -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="text-center py-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4">Learn Filipino, Discover Culture!</h1>
+            <p class="text-xl text-gray-600 mb-8">Gamified learning with authentic Filipino experiences</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="diagnostic.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                    Start Diagnostic Test
+                </a>
+                <a href="lessons.html" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                    Explore Lessons
+                </a>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="py-12">
+            <h2 class="text-3xl font-bold text-center mb-12">Why Learn With Us?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="fas fa-gamepad text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Gamified Learning</h3>
+                    <p>Earn points, complete challenges, and level up like in your favorite games.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="fas fa-microphone-alt text-4xl text-green-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Podcast Practice</h3>
+                    <p>Record and listen to improve your pronunciation with native speakers.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <i class="fas fa-users text-4xl text-yellow-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Community</h3>
+                    <p>Connect with friends and compete on our leaderboards.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded here via JS -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Loading Screen (Cultural Tidbit) -->
+    <div id="loading-screen" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+        <div class="cultural-tidbit p-6 rounded-lg max-w-md mx-4">
+            <h3 class="text-xl font-bold mb-2">Did You Know?</h3>
+            <p id="tidbit-text">The Philippines has over 180 dialects, with Tagalog being the most widely spoken.</p>
+            <button id="close-tidbit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Continue</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
