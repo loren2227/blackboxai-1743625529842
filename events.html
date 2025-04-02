@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | FilipinoPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .event-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        .storytelling-modal {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="header-placeholder"></div>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-2xl font-bold mb-2">Cultural Events</h1>
+            <p class="text-gray-600 mb-6">Join our community events to practice Filipino and learn about Philippine culture.</p>
+            
+            <!-- Featured Event -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                        <img src="https://images.pexels.com/photos/1195505/pexels-photo-1195505.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                             alt="Featured Event" 
+                             class="w-full h-48 md:h-full object-cover rounded-lg">
+                    </div>
+                    <div class="md:w-2/3">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">Featured</span>
+                            <span class="text-sm text-gray-500">Nov 30, 2023</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-2">Bonifacio Day Celebration</h2>
+                        <p class="text-gray-600 mb-4">Join us in commemorating Andres Bonifacio's birthday with special Filipino language workshops and cultural performances.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Workshop</span>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Culture</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Beginner</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1">
+                                Register Now
+                            </button>
+                            <button onclick="openStorytelling('bonifacio')" class="bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-2 px-4 rounded flex-1">
+                                Storytelling
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upcoming Events -->
+            <h2 class="text-xl font-bold mb-4">Upcoming Events</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Event 1 -->
+                <div class="event-card bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <img src="https://images.pexels.com/photos/1195509/pexels-photo-1195509.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                         alt="Christmas Event" 
+                         class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Online</span>
+                            <span class="text-sm text-gray-500">Dec 15, 2023</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Filipino Christmas Traditions</h3>
+                        <p class="text-gray-600 text-sm mb-4">Learn about Simbang Gabi, Noche Buena, and other Filipino holiday traditions.</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Event 2 -->
+                <div class="event-card bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <img src="https://images.pexels.com/photos/2693208/pexels-photo-2693208.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                         alt="Language Exchange" 
+                         class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Language Exchange</span>
+                            <span class="text-sm text-gray-500">Jan 10, 2024</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Tagalog-English Language Exchange</h3>
+                        <p class="text-gray-600 text-sm mb-4">Practice conversational Filipino with native speakers in a friendly environment.</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Event 3 -->
+                <div class="event-card bg-white border border-gray-200 rounded-lg overflow-hidden">
+                    <img src="https://images.pexels.com/photos/4348093/pexels-photo-4348093.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                         alt="Cooking Class" 
+                         class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Cooking</span>
+                            <span class="text-sm text-gray-500">Feb 5, 2024</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Adobo Cooking Class</h3>
+                        <p class="text-gray-600 text-sm mb-4">Learn to cook the Philippines' national dish while practicing kitchen vocabulary.</p>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Past Events -->
+            <h2 class="text-xl font-bold mb-4">Past Events</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Past Event 1 -->
+                <div class="event-card bg-white border border-gray-200 rounded-lg overflow-hidden opacity-70">
+                    <img src="https://images.pexels.com/photos/1114900/pexels-photo-1114900.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                         alt="Past Event 1" 
+                         class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Workshop</span>
+                            <span class="text-sm text-gray-500">Oct 12, 2023</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Basic Tagalog Workshop</h3>
+                        <p class="text-gray-600 text-sm mb-4">Our introductory workshop covered greetings, introductions, and common phrases.</p>
+                        <button class="w-full bg-gray-200 text-gray-600 font-bold py-2 px-4 rounded cursor-not-allowed">
+                            Event Ended
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Past Event 2 -->
+                <div class="event-card bg-white border border-gray-200 rounded-lg overflow-hidden opacity-70">
+                    <img src="https://images.pexels.com/photos/1195503/pexels-photo-1195503.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                         alt="Past Event 2" 
+                         class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Performance</span>
+                            <span class="text-sm text-gray-500">Sep 8, 2023</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Tinikling Dance Workshop</h3>
+                        <p class="text-gray-600 text-sm mb-4">Participants learned the traditional Filipino bamboo dance and its cultural significance.</p>
+                        <button class="w-full bg-gray-200 text-gray-600 font-bold py-2 px-4 rounded cursor-not-allowed">
+                            Event Ended
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Storytelling Modal -->
+            <div id="storytelling-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                <div class="storytelling-modal bg-white rounded-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h2 id="story-title" class="text-2xl font-bold">Story Title</h2>
+                            <button onclick="closeStorytelling()" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
+                        </div>
+                        <div id="story-content" class="prose max-w-none">
+                            <!-- Story content will be loaded here -->
+                        </div>
+                        <div class="mt-6">
+                            <button onclick="closeStorytelling()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Partner Organizations -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-bold mb-6">Our Partners</h2>
+            <p class="text-gray-600 mb-6">We collaborate with these organizations to bring you authentic Filipino cultural experiences.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="flex items-center justify-center p-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/NCCA_logo.svg/1200px-NCCA_logo.svg.png" 
+                         alt="NCCA" 
+                         class="partner-logo h-16 object-contain">
+                </div>
+                <div class="flex items-center justify-center p-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Seal_of_the_Philippine_Department_of_Tourism.svg/1200px-Seal_of_the_Philippine_Department_of_Tourism.svg.png" 
+                         alt="DOT" 
+                         class="partner-logo h-16 object-contain">
+                </div>
+                <div class="flex items-center justify-center p-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Seal_of_the_Commission_on_the_Filipino_Language.svg/1200px-Seal_of_the_Commission_on_the_Filipino_Language.svg.png" 
+                         alt="KWF" 
+                         class="partner-logo h-16 object-contain">
+                </div>
+                <div class="flex items-center justify-center p-4">
+                    <img src="https://www.filipinaslibrary.org.ph/wp-content/uploads/2020/10/Filipinas-Heritage-Library-Logo-1.png" 
+                         alt="FHL" 
+                         class="partner-logo h-16 object-contain">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="app.js"></script>
+    <script>
+        // Storytelling content
+        const stories = {
+            bonifacio: {
+                title: "The Story of Andres Bonifacio",
+                content: `
+                    <h3 class="font-bold text-lg mb-2">The Father of Philippine Revolution</h3>
+                    <p class="mb-4">Andres Bonifacio (1863-1897) was a Filipino revolutionary leader and the founder of the Katipunan, a secret society that spearheaded the uprising against Spanish colonial rule.</p>
+                    
+                    <img src="https://images.pexels.com/photos/1195505/pexels-photo-1195505.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                         alt="Bonifacio" 
+                         class="w-full h-48 object-cover rounded-lg mb-4">
+                    
+                    <h4 class="font-bold mb-2">Early Life</h4>
+                    <p class="mb-4">Born in Tondo, Manila, Bonifacio had little formal education but was self-taught through reading books about the French Revolution and the lives of presidents.</p>
+                    
+                    <h4 class="font-bold mb-2">The Katipunan</h4>
+                    <p class="mb-4">In 1892, Bonifacio founded the Katipunan (Kataas-taasang, Kagalang-galangang Katipunan ng mga Anak ng Bayan), which means "Highest and Most Respected Society of the Children of the Nation."</p>
+                    
+                    <h4 class="font-bold mb-2">Revolution</h4>
+                    <p class="mb-4">On August 23, 1896, Bonifacio and his followers tore their cedulas (community tax certificates) in what became known as the "Cry of Pugad Lawin," signaling the start of the revolution.</p>
+                    
+                    <h4 class="font-bold mb-2">Legacy</h4>
+                    <p>Bonifacio is remembered as the "Father of the Philippine Revolution" and his birthday, November 30, is celebrated as Bonifacio Day, a national holiday in the Philippines.</p>
+                `
+            }
+        };
+
+        // Open storytelling modal
+        function openStorytelling(storyId) {
+            const modal = document.getElementById('storytelling-modal');
+            const title = document.getElementById('story-title');
+            const content = document.getElementById('story-content');
+            
+            if (stories[storyId]) {
+                title.textContent = stories[storyId].title;
+                content.innerHTML = stories[storyId].content;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        // Close storytelling modal
+        function closeStorytelling() {
+            document.getElementById('storytelling-modal').classList.add('hidden');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Close modal when clicking outside content
+            document.getElementById('storytelling-modal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('storytelling-modal')) {
+                    closeStorytelling();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
