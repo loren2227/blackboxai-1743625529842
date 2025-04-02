@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Test | FilipinoPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .question-container {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="header-placeholder"></div>
+
+    <main class="container mx-auto px-4 py-8 max-w-3xl">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-3xl font-bold text-center text-blue-800 mb-6">Filipino Proficiency Test</h1>
+            
+            <div class="mb-6">
+                <div class="flex justify-between mb-1">
+                    <span class="text-sm font-medium" id="progress-text">Question 1 of 10</span>
+                    <span class="text-sm font-medium">Score: <span id="score">0</span>/10</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 10%"></div>
+                </div>
+            </div>
+
+            <div id="question-container" class="question-container">
+                <h2 class="text-xl font-semibold mb-4" id="question-text">Loading question...</h2>
+                
+                <div id="options-container" class="space-y-3">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                
+                <button id="next-button" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50">
+                    Next Question
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Results Modal -->
+    <div id="results-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-8 rounded-lg max-w-md w-full mx-4">
+            <h2 class="text-2xl font-bold text-center mb-4">Test Results</h2>
+            <div class="text-center mb-6">
+                <p class="text-lg" id="result-level">Your level: <span class="font-bold">Beginner</span></p>
+                <p class="mt-2" id="result-description">Based on your score, we recommend starting with basic vocabulary and greetings.</p>
+            </div>
+            <div class="flex justify-center">
+                <a href="lessons.html" id="start-learning" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">
+                    Start Learning
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Diagnostic test questions
+        const questions = [
+            {
+                question: "What does 'Kamusta ka?' mean?",
+                options: [
+                    "How are you?",
+                    "What is your name?",
+                    "Where are you going?",
+                    "Thank you"
+                ],
+                answer: 0
+            },
+            {
+                question: "Which of these means 'thank you' in Filipino?",
+                options: [
+                    "Paalam",
+                    "Salamat",
+                    "Oo",
+                    "Hindi"
+                ],
+                answer: 1
+            },
+            {
+                question: "What is the Filipino word for 'house'?",
+                options: [
+                    "Kotse",
+                    "Bahay",
+                    "Puno",
+                    "Aso"
+                ],
+                answer: 1
+            },
+            {
+                question: "How would you say 'I am hungry' in Filipino?",
+                options: [
+                    "Ako ay busog",
+                    "Ako ay gutom",
+                    "Ako ay pagod",
+                    "Ako ay masaya"
+                ],
+                answer: 1
+            },
+            {
+                question: "What does 'Magandang umaga' mean?",
+                options: [
+                    "Good afternoon",
+                    "Good evening",
+                    "Good night",
+                    "Good morning"
+                ],
+                answer: 3
+            },
+            {
+                question: "Which of these is NOT a Filipino pronoun?",
+                options: [
+                    "Ako",
+                    "Kami",
+                    "Sila",
+                    "Mabuti"
+                ],
+                answer: 3
+            },
+            {
+                question: "What is the correct response to 'Salamat'?",
+                options: [
+                    "Oo",
+                    "Walang anuman",
+                    "Paalam",
+                    "Kamusta"
+                ],
+                answer: 1
+            },
+            {
+                question: "Which word means 'beautiful' in Filipino?",
+                options: [
+                    "Maganda",
+                    "Maliit",
+                    "Malaki",
+                    "Mabilis"
+                ],
+                answer: 0
+            },
+            {
+                question: "What does 'Mahal kita' mean?",
+                options: [
+                    "I like you",
+                    "I love you",
+                    "I miss you",
+                    "I hate you"
+                ],
+                answer: 1
+            },
+            {
+                question: "Which of these is a common Filipino greeting?",
+                options: [
+                    "Kumain ka na ba?",
+                    "Anong oras na?",
+                    "Saan ka pupunta?",
+                    "All of the above"
+                ],
+                answer: 3
+            }
+        ];
+
+        // Test state
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextButton = document.getElementById('next-button');
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const scoreDisplay = document.getElementById('score');
+        const resultsModal = document.getElementById('results-modal');
+        const resultLevel = document.getElementById('result-level');
+        const resultDescription = document.getElementById('result-description');
+        const startLearning = document.getElementById('start-learning');
+
+        // Initialize test
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            questionText.textContent = question.question;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('button');
+                optionElement.className = 'w-full text-left bg-gray-100 hover:bg-gray-200 p-3 rounded-lg';
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+                optionElement.addEventListener('click', selectAnswer);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            progressText.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            nextButton.disabled = true;
+        }
+
+        // Handle answer selection
+        function selectAnswer(e) {
+            // Remove selected class from all options
+            document.querySelectorAll('#options-container button').forEach(btn => {
+                btn.classList.remove('bg-blue-100', 'border-blue-500', 'border-2');
+            });
+            
+            // Add selected class to clicked option
+            e.target.classList.add('bg-blue-100', 'border-blue-500', 'border-2');
+            nextButton.disabled = false;
+            
+            // Store selected answer
+            userAnswers[currentQuestion] = parseInt(e.target.dataset.index);
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            // Check if answer is correct
+            if (userAnswers[currentQuestion] === questions[currentQuestion].answer) {
+                score++;
+                scoreDisplay.textContent = score;
+            }
+            
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show test results
+        function showResults() {
+            let level, description;
+            
+            if (score <= 3) {
+                level = "Beginner";
+                description = "We'll start with basic vocabulary and common phrases to build your foundation.";
+            } else if (score <= 7) {
+                level = "Intermediate";
+                description = "You have a good foundation! We'll focus on conversation practice and grammar.";
+            } else {
+                level = "Advanced";
+                description = "Great job! We'll challenge you with complex conversations and cultural insights.";
+            }
+            
+            resultLevel.innerHTML = `Your level: <span class="font-bold">${level}</span>`;
+            resultDescription.textContent = description;
+            
+            // Store user level in localStorage
+            const user = JSON.parse(localStorage.getItem('filipinopro-user') || '{}');
+            user.level = level.toLowerCase();
+            localStorage.setItem('filipinopro-user', JSON.stringify(user));
+            
+            // Set appropriate lessons link
+            startLearning.href = `lessons.html?level=${level.toLowerCase()}`;
+            
+            // Show modal
+            resultsModal.classList.remove('hidden');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuestion();
+            nextButton.addEventListener('click', nextQuestion);
+        });
+    </script>
+</body>
+</html>
