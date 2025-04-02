@@ -1,0 +1,38 @@
+<header class="bg-white shadow-md">
+    <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-flag text-2xl text-red-600"></i>
+            <a href="index.html" class="text-xl font-bold text-blue-800">FilipinoPro</a>
+        </div>
+        
+        <div class="hidden md:flex space-x-6">
+            <a href="lessons.html" class="hover:text-blue-600">Lessons</a>
+            <a href="podcast.html" class="hover:text-blue-600">Podcast</a>
+            <a href="leaderboard.html" class="hover:text-blue-600">Leaderboard</a>
+            <a href="events.html" class="hover:text-blue-600">Events</a>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <a href="login.html" class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full hover:bg-blue-200 transition">Login</a>
+            <div id="user-avatar" class="hidden">
+                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                     alt="User Avatar" 
+                     class="w-10 h-10 rounded-full object-cover">
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+        <div class="px-4 py-2 space-y-2">
+            <a href="lessons.html" class="block py-2 hover:bg-gray-100">Lessons</a>
+            <a href="podcast.html" class="block py-2 hover:bg-gray-100">Podcast</a>
+            <a href="leaderboard.html" class="block py-2 hover:bg-gray-100">Leaderboard</a>
+            <a href="events.html" class="block py-2 hover:bg-gray-100">Events</a>
+            <a href="profile.html" class="block py-2 hover:bg-gray-100">Profile</a>
+        </div>
+    </div>
+</header>
