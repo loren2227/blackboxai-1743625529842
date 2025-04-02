@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard | FilipinoPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .rank-1 {
+            background: linear-gradient(135deg, #FFD700, #FFC000);
+        }
+        .rank-2 {
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+        }
+        .rank-3 {
+            background: linear-gradient(135deg, #CD7F32, #B87333);
+        }
+        .streak-flame {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="header-placeholder"></div>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-2xl font-bold mb-6">Leaderboard</h1>
+            
+            <!-- Time Filters -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button class="px-3 py-1 rounded-full bg-blue-600 text-white">All Time</button>
+                <button class="px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">This Month</button>
+                <button class="px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">This Week</button>
+                <button class="px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300">Friends</button>
+            </div>
+            
+            <!-- Top 3 Winners -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <!-- 2nd Place -->
+                <div class="rank-2 p-4 rounded-lg flex flex-col items-center">
+                    <div class="relative mb-4">
+                        <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center text-2xl font-bold text-gray-600">
+                            2
+                        </div>
+                        <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200" 
+                             alt="2nd Place" 
+                             class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full border-2 border-white object-cover">
+                    </div>
+                    <h3 class="font-bold">Pedro_Bautista</h3>
+                    <div class="flex items-center mt-1">
+                        <i class="fas fa-fire text-orange-500 mr-1"></i>
+                        <span>28 day streak</span>
+                    </div>
+                    <div class="mt-2 text-sm">
+                        <i class="fas fa-star text-yellow-500 mr-1"></i>
+                        <span>1,890 XP</span>
+                    </div>
+                </div>
+                
+                <!-- 1st Place -->
+                <div class="rank-1 p-6 rounded-lg flex flex-col items-center order-first md:order-none">
+                    <div class="relative mb-4">
+                        <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center text-2xl font-bold text-gray-600">
+                            1
+                        </div>
+                        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200" 
+                             alt="1st Place" 
+                             class="absolute -bottom-2 -right-2 w-14 h-14 rounded-full border-2 border-white object-cover">
+                        <div class="absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-lg">Maria_Santos</h3>
+                    <div class="flex items-center mt-1">
+                        <i class="fas fa-fire streak-flame text-orange-500 mr-1"></i>
+                        <span>42 day streak!</span>
+                    </div>
+                    <div class="mt-2">
+                        <i class="fas fa-star text-yellow-500 mr-1"></i>
+                        <span>2,450 XP</span>
+                    </div>
+                </div>
+                
+                <!-- 3rd Place -->
+                <div class="rank-3 p-4 rounded-lg flex flex-col items-center">
+                    <div class="relative mb-4">
+                        <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center text-2xl font-bold text-gray-600">
+                            3
+                        </div>
+                        <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=200" 
+                             alt="3rd Place" 
+                             class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full border-2 border-white object-cover">
+                    </div>
+                    <h3 class="font-bold">Ana_Reyes</h3>
+                    <div class="flex items-center mt-1">
+                        <i class="fas fa-fire text-orange-500 mr-1"></i>
+                        <span>21 day streak</span>
+                    </div>
+                    <div class="mt-2 text-sm">
+                        <i class="fas fa-star text-yellow-500 mr-1"></i>
+                        <span>1,650 XP</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Full Leaderboard Table -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Streak</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">XP</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Level</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                         alt="User" 
+                                         class="w-8 h-8 rounded-full mr-2">
+                                    <span>JuanDelaCruz</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-fire text-orange-500 mr-1"></i>
+                                    <span>7</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-1"></i>
+                                    <span>1,245</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Intermediate</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img src="https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                         alt="User" 
+                                         class="w-8 h-8 rounded-full mr-2">
+                                    <span>Luis_Gonzales</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-fire text-orange-500 mr-1"></i>
+                                    <span>5</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-1"></i>
+                                    <span>980</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Beginner</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">6</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img src="https://images.pexels.com/photos/1586996/pexels-photo-1586996.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                         alt="User" 
+                                         class="w-8 h-8 rounded-full mr-2">
+                                    <span>Carla_Ramos</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-fire text-orange-500 mr-1"></i>
+                                    <span>3</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-1"></i>
+                                    <span>750</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Beginner</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">7</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <img src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                                         alt="User" 
+                                         class="w-8 h-8 rounded-full mr-2">
+                                    <span>Miguel_Tan</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-fire text-orange-500 mr-1"></i>
+                                    <span>2</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-500 mr-1"></i>
+                                    <span>620</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Beginner</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="flex justify-between items-center mt-6">
+                <button class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    Previous
+                </button>
+                <div class="flex space-x-1">
+                    <button class="px-3 py-1 border border-blue-500 rounded-md text-sm font-medium text-blue-600 bg-blue-50">1</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">2</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">3</button>
+                </div>
+                <button class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    Next
+                </button>
+            </div>
+        </div>
+        
+        <!-- Weekly Challenge -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-bold mb-4">Weekly Challenge</h2>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                <h3 class="font-bold text-lg mb-2">Complete 5 Lessons</h3>
+                <p class="text-gray-600 mb-4">Finish any 5 lessons this week to earn bonus XP and a special badge!</p>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 60%"></div>
+                </div>
+                <div class="flex justify-between text-sm text-gray-600">
+                    <span>3/5 lessons completed</span>
+                    <span>60%</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                    <h3 class="font-bold mb-2">Your Position</h3>
+                    <p class="text-3xl font-bold text-blue-600">15th</p>
+                    <p class="text-sm text-gray-500 mt-1">Top 20% of learners</p>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                    <h3 class="font-bold mb-2">Time Remaining</h3>
+                    <p class="text-3xl font-bold text-blue-600">2d 12h</p>
+                    <p class="text-sm text-gray-500 mt-1">Challenge ends Sunday</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="app.js"></script>
+    <script>
+        // Leaderboard functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            // Filter leaderboard by time period
+            document.querySelectorAll('.flex-wrap button').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.flex-wrap button').forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
+                    });
+                    
+                    // Add active class to clicked button
+                    button.classList.remove('bg-gray-200', 'hover:bg-gray-300');
+                    button.classList.add('bg-blue-600', 'text-white');
+                    
+                    // In a real app, would fetch filtered leaderboard data here
+                });
+            });
+            
+            // Load user's current position from localStorage
+            const user = JSON.parse(localStorage.getItem('filipinopro-user') || '{}');
+            if (user.username) {
+                // Would fetch actual leaderboard position from server in real app
+                console.log(`Loaded data for ${user.username}`);
+            }
+        });
+    </script>
+</body>
+</html>
