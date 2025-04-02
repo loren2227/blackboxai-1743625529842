@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator | FilipinoPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .translation-box {
+            min-height: 150px;
+        }
+        .dialect-tag {
+            transition: all 0.2s ease;
+        }
+        .dialect-tag:hover {
+            transform: scale(1.05);
+        }
+        .dialect-tag.active {
+            border-color: #3B82F6;
+            background-color: #EFF6FF;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="header-placeholder"></div>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-2xl font-bold mb-2">Filipino Translator</h1>
+            <p class="text-gray-600 mb-6">Translate between English and Filipino dialects. Today's remaining translations: <span id="translations-left" class="font-bold">5</span>/10</p>
+            
+            <!-- Dialect Selection -->
+            <div class="mb-6">
+                <h2 class="text-lg font-semibold mb-3">Select Dialect</h2>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="selectDialect('tagalog')" class="dialect-tag active px-4 py-2 border-2 border-gray-200 rounded-full flex items-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/20px-Flag_of_the_Philippines.svg.png" 
+                             alt="Tagalog" 
+                             class="w-4 h-4 mr-2">
+                        Tagalog
+                    </button>
+                    <button onclick="selectDialect('cebuano')" class="dialect-tag px-4 py-2 border-2 border-gray-200 rounded-full flex items-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/20px-Flag_of_the_Philippines.svg.png" 
+                             alt="Cebuano" 
+                             class="w-4 h-4 mr-2">
+                        Cebuano
+                    </button>
+                    <button onclick="selectDialect('ilocano')" class="dialect-tag px-4 py-2 border-2 border-gray-200 rounded-full flex items-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/20px-Flag_of_the_Philippines.svg.png" 
+                             alt="Ilocano" 
+                             class="w-4 h-4 mr-2">
+                        Ilocano
+                    </button>
+                    <button onclick="selectDialect('bicolano')" class="dialect-tag px-4 py-2 border-2 border-gray-200 rounded-full flex items-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/20px-Flag_of_the_Philippines.svg.png" 
+                             alt="Bicolano" 
+                             class="w-4 h-4 mr-2">
+                        Bicolano
+                    </button>
+                    <button onclick="selectDialect('waray')" class="dialect-tag px-4 py-2 border-2 border-gray-200 rounded-full flex items-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/20px-Flag_of_the_Philippines.svg.png" 
+                             alt="Waray" 
+                             class="w-4 h-4 mr-2">
+                        Waray
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Translation Boxes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="font-medium">English</label>
+                        <button onclick="swapLanguages()" class="text-blue-600 hover:text-blue-800 text-sm">
+                            <i class="fas fa-exchange-alt mr-1"></i> Swap
+                        </button>
+                    </div>
+                    <div class="translation-box bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <textarea id="source-text" class="w-full h-full bg-transparent focus:outline-none resize-none" placeholder="Type text to translate..."></textarea>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="font-medium" id="target-language">Tagalog</label>
+                        <button onclick="copyTranslation()" class="text-blue-600 hover:text-blue-800 text-sm">
+                            <i class="far fa-copy mr-1"></i> Copy
+                        </button>
+                    </div>
+                    <div class="translation-box bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <div id="translation-result" class="text-gray-600">Translation will appear here...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Translate Button -->
+            <div class="flex justify-center">
+                <button onclick="translateText()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full flex items-center">
+                    <i class="fas fa-language mr-2"></i> Translate
+                </button>
+            </div>
+        </div>
+        
+        <!-- Common Phrases -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-bold mb-4">Common Phrases</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <button onclick="insertPhrase('How are you?')" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-lg text-left">
+                    <div class="font-medium">How are you?</div>
+                    <div class="text-sm text-gray-500" id="phrase-translation">Kamusta ka?</div>
+                </button>
+                <button onclick="insertPhrase('Thank you')" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-lg text-left">
+                    <div class="font-medium">Thank you</div>
+                    <div class="text-sm text-gray-500">Salamat</div>
+                </button>
+                <button onclick="insertPhrase('Good morning')" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-lg text-left">
+                    <div class="font-medium">Good morning</div>
+                    <div class="text-sm text-gray-500">Magandang umaga</div>
+                </button>
+                <button onclick="insertPhrase('I love you')" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-lg text-left">
+                    <div class="font-medium">I love you</div>
+                    <div class="text-sm text-gray-500">Mahal kita</div>
+                </button>
+                <button onclick="insertPhrase('How much is this?')" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-lg text-left">
+                    <div class="font-medium">How much is this?</div>
+                    <div class="text-sm text-gray-500">Magkano ito?</div>
+                </button>
+                <button onclick="insertPhrase('Where is the bathroom?')" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-lg text-left">
+                    <div class="font-medium">Where is the bathroom?</div>
+                    <div class="text-sm text-gray-500">Nasaan ang banyo?</div>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="app.js"></script>
+    <script>
+        // Translator state
+        let currentDialect = 'tagalog';
+        let translationsLeft = 5;
+        let isEnglishToFilipino = true;
+        
+        // Sample translations (in a real app, this would use a proper translation API)
+        const translations = {
+            tagalog: {
+                "How are you?": "Kamusta ka?",
+                "Thank you": "Salamat",
+                "Good morning": "Magandang umaga",
+                "I love you": "Mahal kita",
+                "How much is this?": "Magkano ito?",
+                "Where is the bathroom?": "Nasaan ang banyo?"
+            },
+            cebuano: {
+                "How are you?": "Kumusta ka?",
+                "Thank you": "Salamat",
+                "Good morning": "Maayong buntag",
+                "I love you": "Gihigugma tika",
+                "How much is this?": "Tagpila ni?",
+                "Where is the bathroom?": "Hain ang kasilyas?"
+            },
+            ilocano: {
+                "How are you?": "Kumusta ka?",
+                "Thank you": "Agyamanak",
+                "Good morning": "Naimbag a bigat",
+                "I love you": "Ay-ayaten ka",
+                "How much is this?": "Mano daytoy?",
+                "Where is the bathroom?": "Sadino ti banio?"
+            },
+            bicolano: {
+                "How are you?": "Kumusta ka?",
+                "Thank you": "Dios mabalos",
+                "Good morning": "Marhay na aga",
+                "I love you": "Namumutan ta ka",
+                "How much is this?": "Gurano ini?",
+                "Where is the bathroom?": "Sain an banyo?"
+            },
+            waray: {
+                "How are you?": "Kumusta ka?",
+                "Thank you": "Salamat",
+                "Good morning": "Maupay nga aga",
+                "I love you": "Ginugugma ko ikaw",
+                "How much is this?": "Tagpira ini?",
+                "Where is the bathroom?": "Hain an banyo?"
+            }
+        };
+        
+        // Select dialect
+        function selectDialect(dialect) {
+            currentDialect = dialect;
+            document.querySelectorAll('.dialect-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            document.getElementById('target-language').textContent = dialect.charAt(0).toUpperCase() + dialect.slice(1);
+            
+            // Update phrase translations
+            if (!isEnglishToFilipino) {
+                updatePhraseTranslations();
+            }
+        }
+        
+        // Swap languages
+        function swapLanguages() {
+            isEnglishToFilipino = !isEnglishToFilipino;
+            const sourceText = document.getElementById('source-text');
+            const translationResult = document.getElementById('translation-result');
+            
+            if (sourceText.value.trim() && translationResult.textContent !== 'Translation will appear here...') {
+                sourceText.value = translationResult.textContent;
+                translationResult.textContent = 'Translation will appear here...';
+            }
+            
+            updatePhraseTranslations();
+        }
+        
+        // Update phrase translations when language direction changes
+        function updatePhraseTranslations() {
+            if (isEnglishToFilipino) {
+                document.querySelectorAll('#phrase-translation').forEach((el, index) => {
+                    const phrases = [
+                        "How are you?", "Thank you", "Good morning", 
+                        "I love you", "How much is this?", "Where is the bathroom?"
+                    ];
+                    el.textContent = translations[currentDialect][phrases[index]];
+                });
+            } else {
+                document.querySelectorAll('#phrase-translation').forEach(el => {
+                    el.textContent = "English";
+                });
+            }
+        }
+        
+        // Insert phrase into textarea
+        function insertPhrase(phrase) {
+            const textarea = document.getElementById('source-text');
+            textarea.value = phrase;
+            textarea.focus();
+        }
+        
+        // Copy translation to clipboard
+        function copyTranslation() {
+            const translation = document.getElementById('translation-result').textContent;
+            if (translation && translation !== 'Translation will appear here...') {
+                navigator.clipboard.writeText(translation);
+                alert('Copied to clipboard!');
+            }
+        }
+        
+        // Translate text
+        function translateText() {
+            const text = document.getElementById('source-text').value.trim();
+            if (!text) {
+                alert('Please enter text to translate');
+                return;
+            }
+            
+            if (translationsLeft <= 0) {
+                alert('You have reached your daily translation limit. Come back tomorrow!');
+                return;
+            }
+            
+            // In a real app, this would call a translation API
+            let translation;
+            if (isEnglishToFilipino) {
+                translation = translations[currentDialect][text] || "Translation not available";
+            } else {
+                // Reverse lookup (simplified for demo)
+                for (const [eng, trans] of Object.entries(translations[currentDialect])) {
+                    if (trans === text) {
+                        translation = eng;
+                        break;
+                    }
+                }
+                translation = translation || "Translation not available";
+            }
+            
+            document.getElementById('translation-result').textContent = translation;
+            translationsLeft--;
+            document.getElementById('translations-left').textContent = translationsLeft;
+            
+            // Save to localStorage
+            localStorage.setItem('translationsLeft', translationsLeft);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load remaining translations from localStorage
+            const savedTranslations = localStorage.getItem('translationsLeft');
+            if (savedTranslations) {
+                translationsLeft = parseInt(savedTranslations);
+                document.getElementById('translations-left').textContent = translationsLeft;
+            }
+        });
+    </script>
+</body>
+</html>
